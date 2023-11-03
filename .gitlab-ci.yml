@@ -17,12 +17,12 @@ test:
     when: always
     name: "Serenity Report"
     paths:
-      - target/site/serenity/*
+      - target/site/serenity/
 
 pages:
   stage: report
   script:
-    - mv target/site/serenity/* public/
+    - mv target/site/serenity/ public/
   artifacts:
     paths:
       - public
