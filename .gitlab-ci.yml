@@ -1,24 +1,23 @@
-stages:
-  - Test
-  - Report
-
-Test:
-  stage: Test
   image: markhobson/maven-chrome
-  allow_failure: true
-  script:
-    - mvn clean verify
-  artifacts:
-    when: always
-    paths:
-      - target/site/serenity
-    expire_in: 1 h
 
-Report:
-  stage: Report
-  artifacts:
-    when: always
-    paths:
-      - target/site/serenity
-    expire_in: 1 h
-  allow_failure: true
+  stages:
+    - test
+
+  variables:
+    MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+  test:
+    stage: test
+    allow_failure: true
+    
+    # Run the tests  
+    script:
+      - mvn clean verify
+    
+    # Store artifacts
+    artifacts:
+      when: always
+      name: "Serenity Report"
+      paths:
+        - target/site/serenity/*
+      expire_in: 24 h
