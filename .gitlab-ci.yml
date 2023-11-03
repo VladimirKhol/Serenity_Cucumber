@@ -1,20 +1,27 @@
-  image: markhobson/maven-chrome
+image: markhobson/maven-chrome
 
-  stages:
-    - test
+stages:
+  - test
+  - report
 
-  test:
-    stage: test
-    allow_failure: true
+test:
+  stage: test
+  allow_failure: true
 
-    # Run the tests
-    script:
-      - mvn clean verify
+  script:
+    - mvn clean verify
 
-    # Store artifacts
-    artifacts:
-      when: always
-      name: "Serenity Report"
-      paths:
-        - target/site/serenity/*
-      expire_in: 24 h
+  artifacts:
+    when: always
+    name: "Serenity Report"
+    paths:
+      - target/site/serenity/*
+    expire_in: 24 h
+
+pages:
+  stage: report
+  script:
+    - mv target/site/serenity/* public/
+  artifacts:
+    paths:
+      - "public/"
