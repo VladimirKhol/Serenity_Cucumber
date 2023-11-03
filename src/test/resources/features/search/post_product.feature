@@ -4,7 +4,7 @@ Feature: Search for the product
 ### Available products: "orange", "apple", "pasta", "cola"
 ### Prepare Positive and negative scenarios
 
-  Scenario Outline: A user expects to see the existing product in the list of products
+  Scenario Outline: User expects to see the existing product in the list of products
     When he calls endpoint "<available_product>"
     Then he sees the title "<expected_title>" in the list of products
     Examples:
@@ -13,7 +13,7 @@ Feature: Search for the product
       | pasta             | Grand'Italia Tortellini ai formaggi                |
       | cola              | Pepsi Cola fles                                    |
 
-  Scenario Outline: A user expects to see an error message when searching for not existing products
+  Scenario Outline: User expects to see an error message when searching for not existing products
     When he calls endpoint "<bad_endpoint>"
     Then he sees an error message "Not found"
 
