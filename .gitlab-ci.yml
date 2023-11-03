@@ -16,5 +16,5 @@
       when: always
       name: "Serenity Report"
       paths:
-        - target/site/serenity/index.html
+        - target/site/serenity/*
       expire_in: 24 h
