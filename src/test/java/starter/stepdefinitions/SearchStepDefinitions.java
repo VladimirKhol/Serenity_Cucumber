@@ -2,35 +2,32 @@ package starter.stepdefinitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.annotations.Steps;
-import org.hamcrest.Matchers;
+import starter.env.ApplicationProperties;
+import starter.env.Environment;
 
+import static net.serenitybdd.rest.SerenityRest.given;
 import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
-import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.*;
 
 public class SearchStepDefinitions {
-
-    @Steps
-    public CarsAPI carsAPI;
+    ApplicationProperties appProps = Environment.INSTANCE.getApplicationProperties();
 
     @When("he calls endpoint {string}")
-    public void heCallsEndpoint(String arg0) {
-        SerenityRest.given().get(arg0);
+    public void heCallsEndpoint(String endpoint) {
+        given().get(appProps.getBaseURL() + appProps.path() + endpoint);
     }
 
-    @Then("he sees the results displayed for apple")
-    public void heSeesTheResultsDisplayedForApple() {
-        restAssuredThat(response -> response.statusCode(200));
+    @Then("he sees the title {string} in the list of products")
+    public void heSeesTheResultsDisplayedFor(String title) {
+        restAssuredThat(response -> response.body(containsString(title)));
     }
 
-    @Then("he sees the results displayed for mango")
-    public void heSeesTheResultsDisplayedForMango() {
-        restAssuredThat(response -> response.body("title", contains("mango")));
-    }
-
-    @Then("he doesn not see the results")
-    public void he_Doesn_Not_See_The_Results() {
-        restAssuredThat(response -> response.body("error", contains("True")));
+    @Then("he sees an error message {string}")
+    public void heSeesErrorMessage(String errMessage) {
+        restAssuredThat(response ->
+                response.appendRootPath("detail")
+                        .body("error", equalTo(true))
+                        .and()
+                        .body("message", equalTo(errMessage)));
     }
 }
