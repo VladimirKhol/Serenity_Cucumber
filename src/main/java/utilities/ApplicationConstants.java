@@ -1,4 +1,4 @@
-package starter.utilities;
+package utilities;
 
 public class ApplicationConstants {
     public static final String ENVIRONMENT_PROPS = "application.properties";

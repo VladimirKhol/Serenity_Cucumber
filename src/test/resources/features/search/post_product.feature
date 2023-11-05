@@ -1,9 +1,5 @@
 Feature: Search for the product
 
-### Please use endpoint GET https://waarkoop-server.herokuapp.com/api/v1/search/demo/{product} for getting the products.
-### Available products: "orange", "apple", "pasta", "cola"
-### Prepare Positive and negative scenarios
-
   Scenario Outline: User expects to see the existing product in the list of products
     When he calls endpoint "<available_product>"
     Then he sees the title "<expected_title>" in the list of products

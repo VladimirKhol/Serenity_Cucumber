@@ -1,20 +1,20 @@
-package starter.env;
+package env;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import starter.utilities.FileOperations;
-import starter.utilities.FilePathBuilder;
-import starter.utilities.ApplicationConstants;
+import utilities.ApplicationConstants;
+import utilities.FileOperations;
+import utilities.FilePathBuilder;
 
 public class ApplicationProperties {
 
     private final Logger logger = LoggerFactory.getLogger(ApplicationProperties.class);
-
     private String baseURL;
     private String path;
 
@@ -25,13 +25,13 @@ public class ApplicationProperties {
     }
 
     protected void loadProperties() {
-        FilePathBuilder fpb = new FilePathBuilder(ApplicationConstants.ENVIRONMENT_PROPS);
+        val fpb = new FilePathBuilder(ApplicationConstants.ENVIRONMENT_PROPS);
         fpb.setParentDirectory(ApplicationConstants.PROPERTIES_DIRECTORY);
 
-        String envProps = fpb.getFilePath();
+        val envProps = fpb.getFilePath();
         logger.debug("Environment Properties Path {}", envProps);
 
-        FileOperations fileOps = new FileOperations(new File(envProps));
+        val fileOps = new FileOperations(new File(envProps));
         Map<String, String> props = fileOps.getPropValuesInMap();
 
         if (props == null) {

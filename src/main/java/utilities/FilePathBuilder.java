@@ -1,20 +1,16 @@
-package starter.utilities;
+package utilities;
 
 import java.io.File;
 
+import env.Environment;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import starter.env.Environment;
-
 public class FilePathBuilder {
-
     private final Logger logger = LoggerFactory.getLogger(FilePathBuilder.class);
-
     private boolean loadFromApplicationPath = true;
-
     private String resourceName;
-
     private String parentDirectory;
 
     public FilePathBuilder(String resName) {
@@ -27,7 +23,7 @@ public class FilePathBuilder {
     }
 
     public String getFilePath() {
-        StringBuilder builder = new StringBuilder();
+        val builder = new StringBuilder();
         if (loadFromApplicationPath) {
             logger.debug("Resource is set to load from Application Path.");
             builder.append(Environment.INSTANCE.getResourcePath()).append(File.separatorChar);

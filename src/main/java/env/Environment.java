@@ -1,4 +1,6 @@
-package starter.env;
+package env;
+
+import lombok.val;
 
 import java.io.File;
 
@@ -21,9 +23,9 @@ public enum Environment {
 
     public String getResourcePath() {
         if (resourcePath == null) {
-            String userDir = System.getProperty("user.dir");
-            String projectResourcesPath = userDir.concat("/src/test/resources");
-            File f = new File(projectResourcesPath);
+            val userDir = System.getProperty("user.dir");
+            val projectResourcesPath = userDir.concat("/src/test/resources");
+            val f = new File(projectResourcesPath);
             if (f.exists()) {
                 resourcePath = projectResourcesPath;
             } else {
