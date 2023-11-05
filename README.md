@@ -17,7 +17,7 @@
 1. Go to [GitLabProject](https://gitlab.com/volodymyrkholostoy/sidemo).
 2. Navigate to [Build -> Pipelines](https://gitlab.com/volodymyrkholostoy/sidemo/-/pipelines).
 3. Click Run pipeline button
-4. Wait till pipelines end
+4. Wait till all stages be end
 5. To take a look at report go to [Deploy -> Pages](https://gitlab.com/volodymyrkholostoy/sidemo/pages)  
 6. Click generated link in Access pages
 
